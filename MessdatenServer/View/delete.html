@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Messmittelverwaltung</title>
+    <link rel="stylesheet" media="screen" href="css/bootstrap.css" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/form.css">
+    <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/uddateForm.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top" style="background-color: #e3e3e3;" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <img class="logo" src="images/logo.png" height="50">
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="">Simulation</a>
+                    </li>
+                    <li>
+                        <a href="">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" id="id_form">
+        <form>
+            <fieldset class="ourform">
+                <legend id="id_legend">Delete Device</legend>
+                <dl id="name_field">
+                    <dt><label>Id</label></dt>
+                    <dd>
+                        <input name="Id" id="name" type="text" readonly="readonly">
+                    </dd>
+                </dl>
+                <dl id="hostIp_field">
+                    <dt><label>Host-IP</label></dt>
+                    <dd>
+                        <input name="HostIp" id="hostIp" type="text" readonly="readonly">
+                    </dd>
+                </dl>
+                <dl id="dataSource_field">
+                    <dt><label>Data-Source</label></dt>
+                    <dd>
+                        <input name="DataSource" id="dataSource" type="text" readonly="readonly">
+                    </dd>
+                </dl>
+                <dl id="group_field">
+                    <dt><label>Group</label></dt>
+                    <dd>
+                        <input name="Group" id="group" type="text" readonly="readonly">
+                    </dd>
+                </dl>
+                <dl id="protocol_field">
+                    <dt><label>Protocol</label></dt>
+                    <dd>
+                        <input name="Protocol" id="protocol" type="text" readonly="readonly">
+                    </dd>
+                </dl>
+            </fieldset>
+            <input type="button" class="btn btn-primary" id="btn_confirm" onclick="deleteDevice()" value="Delete"></>
+            <input type="button" class="btn" onclick="openListForm()" value="Cancel"></>
+        </form>
+    </div>
+    <nav class="navbar-fixed-bottom">
+        <br>
+        <p>
+            Copyright &copy
+            <script type="text/javascript">document.write(new Date().getFullYear());</script>
+            by Team Messdaten-Server
+        </p>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MessdatenServer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConfigPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\\temp\\DeviceConfig.json</Value>
+    </Setting>
+    <Setting Name="BaudRateSylvacGauge" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4800</Value>
+    </Setting>
+    <Setting Name="StopBitsSylvacGauge" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">One</Value>
+    </Setting>
+    <Setting Name="DataBitsSylvacGauge" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="ParitySylvacGauge" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Even</Value>
+    </Setting>
+    <Setting Name="AsciCarriageReturn" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">13</Value>
+    </Setting>
+    <Setting Name="TimeOutReceiveData" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
