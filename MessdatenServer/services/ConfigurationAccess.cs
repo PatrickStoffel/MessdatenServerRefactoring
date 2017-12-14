@@ -15,7 +15,15 @@ namespace MessdatenServer.services
             List<Device> items = null;
             using (StreamReader reader = new StreamReader(Properties.Settings.Default.ConfigPath))
             {
-                string json = reader.ReadToEnd();
+                string json = null;
+                try
+                {
+                    json = reader.ReadToEnd();
+                }
+                catch (Exception ex)
+                {
+                    throw new ReadWriteException("Device-Liste konnte nicht aus der Konfiguration gelesen werden", ex);
+                }
                 items = JsonConvert.DeserializeObject<List<Device>>(json);
             }
             return items;
@@ -29,12 +37,12 @@ namespace MessdatenServer.services
                 try
                 {
                     writer.Write(json);
+                    return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return false;
+                    throw new ReadWriteException("Device-Liste konnte nicht in Konfiguration gespeichert werden", ex);
                 }
-                return true;
             }
         }
     }
