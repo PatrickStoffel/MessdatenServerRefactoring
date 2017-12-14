@@ -8,10 +8,8 @@ namespace MessdatenServer.services
 {
     public class Validator
     {
-        public static bool IsNewDeviceNameValid(Device newDevice)
+        public static bool IsNewDeviceNameValid(List<Device> devices, Device newDevice)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-
             foreach (Device existingDevice in devices)
             {
                 if (existingDevice.Id.Equals(newDevice.Id.Trim()))
@@ -21,6 +19,5 @@ namespace MessdatenServer.services
             }
             return true;
         }
-
     }
 }
