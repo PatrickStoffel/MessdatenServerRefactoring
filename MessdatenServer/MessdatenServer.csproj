@@ -134,6 +134,7 @@
     <Compile Include="services\ConfigurationAccess.cs" />
     <Compile Include="services\MeasurementValueReader.cs" />
     <Compile Include="services\ConfigurationAdapter.cs" />
+    <Compile Include="services\ReadWriteException.cs" />
     <Compile Include="services\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
