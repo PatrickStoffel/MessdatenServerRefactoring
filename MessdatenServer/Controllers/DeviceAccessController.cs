@@ -36,18 +36,17 @@ namespace MessdatenServer.Controllers
         public IHttpActionResult SetValueZero(String id)
 
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices, id);
-            if (deviceToRead == null)
+            try
             {
-                return BadRequest("Device mit Id " + id + " wurde in der Konfiguration nicht gefunden!");
+                List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+                Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices, id);
+                String handShake = new SylcvacComAccess(messages).SetActualValueToZero(deviceToRead);
+                return Ok(handShake);
             }
-            String handShake = new SylcvacComAccess(messages).SetActualValueToZero(deviceToRead);
-            if (handShake == null)
+            catch (ReadWriteException ex)
             {
-                return BadRequest(messages[deviceToRead.Id]);
-            }
-            return Ok(handShake);
+                return BadRequest(ex.Message);
+            }            
         }
     }
 }

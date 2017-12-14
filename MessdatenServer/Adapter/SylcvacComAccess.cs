@@ -59,7 +59,7 @@ namespace MessdatenServer.Adapter
             }
             catch (Exception ex)
             {
-                messages[deviceToRead.Id] = "Fehler beim Zugriff auf " + deviceToRead.DataSource + "!\n" + ex.Message;
+                throw new ReadWriteException("Fehler beim Zugriff auf " + deviceToRead.DataSource + "!", ex);
             }
             finally
             {
@@ -79,8 +79,7 @@ namespace MessdatenServer.Adapter
                 }
                 else
                 {
-                    messages[deviceToRead.Id] = "Timeout beim Lesen von " + deviceToRead.DataSource + "!\n";
-                    break;
+                    throw new ReadWriteException("Timeout beim Lesen von " + deviceToRead.DataSource + "!");
                 }
             }
         }
