@@ -8,7 +8,7 @@ using System.IO;
 
 namespace MessdatenServer.services
 {
-    public class ConfigurationAdapter
+    public class DeviceListHandler
     {
         
         public static Device GetDeviceFromDeviceList(List<Device> devices,String deviceId)

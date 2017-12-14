@@ -38,7 +38,7 @@ namespace MessdatenServer.Controllers
             try
             {
                 List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-                return Ok(ConfigurationAdapter.GetDeviceFromDeviceList(devices, id));
+                return Ok(DeviceListHandler.GetDeviceFromDeviceList(devices, id));
             }
             catch (ReadWriteException ex)
             {
@@ -53,7 +53,7 @@ namespace MessdatenServer.Controllers
             try
             {
                 List<Device> devicesInConfig = ConfigurationAccess.GetDeviceListFromConfig();
-                List<Device> updetedList = ConfigurationAdapter.UpdateDeviceInDeviceList(devicesInConfig, updatedDevice);
+                List<Device> updetedList = DeviceListHandler.UpdateDeviceInDeviceList(devicesInConfig, updatedDevice);
                 ConfigurationAccess.SaveDeviceListToConfig(updetedList);
                 return Ok();
             }
@@ -74,7 +74,7 @@ namespace MessdatenServer.Controllers
                 {
                     return BadRequest("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration, die ID muss eindeutig sein!");
                 }
-                List<Device> savedDevices = ConfigurationAdapter.SaveNewDeviceInDeviceList(devices, newDevice);
+                List<Device> savedDevices = DeviceListHandler.SaveNewDeviceInDeviceList(devices, newDevice);
                 ConfigurationAccess.SaveDeviceListToConfig(savedDevices);
                 return Ok();
             }
@@ -91,7 +91,7 @@ namespace MessdatenServer.Controllers
             try
             {
                 List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-                List<Device> modifiedList = ConfigurationAdapter.DeleteDeviceInDeviceList(devices, id);
+                List<Device> modifiedList = DeviceListHandler.DeleteDeviceInDeviceList(devices, id);
                 ConfigurationAccess.SaveDeviceListToConfig(modifiedList);
                 return Ok();
             }
