@@ -18,18 +18,17 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/value/{id}")]
         public IHttpActionResult GetMeasurementValue(String id)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices,id);
-            if(deviceToRead == null)
+            try
             {
-                return BadRequest("Device mit Id " + id + " wurde in der Konfiguration nicht gefunden!");
+                List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+                Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices, id);
+                String actualValue = MeasurementValueReader.GetActualMeasurementValue(deviceToRead, messages);
+                return Ok(Double.Parse(actualValue));
             }
-            String actualValue = MeasurementValueReader.GetActualMeasurementValue(deviceToRead, messages);
-            if(actualValue == null)
+            catch (ReadWriteException ex)
             {
-                return BadRequest(messages[deviceToRead.Id]);
-            }
-            return Ok(Double.Parse(actualValue));
+                return BadRequest(ex.Message);
+            }       
         }
 
         [HttpGet]

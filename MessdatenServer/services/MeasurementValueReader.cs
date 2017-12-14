@@ -19,8 +19,7 @@ namespace MessdatenServer.services
                     actualValue = new SylcvacComAccess(messages).GetActualValueFromComInterface(deviceToRead);
                     break;
                 default:
-                    messages[deviceToRead.Id] = "Keine Schnittstelle für das Prokololl " + deviceToRead.Protocol + " implementiert";
-                    break;
+                    throw new ReadWriteException("Keine Schnittstelle für das Prokololl " + deviceToRead.Protocol + " implementiert");
             }           
             return actualValue;
         }

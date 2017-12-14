@@ -5,6 +5,7 @@ using System.Web;
 using System.IO.Ports;
 using MessdatenServer.Models;
 using System.Text.RegularExpressions;
+using MessdatenServer.services;
 
 namespace MessdatenServer.Adapter
 {
@@ -35,7 +36,7 @@ namespace MessdatenServer.Adapter
             }
             catch (Exception ex)
             {
-                messages[deviceToRead.Id] = "Fehler beim Zugriff auf " + deviceToRead.DataSource + "!\n" + ex.Message;
+                throw new ReadWriteException("Fehler beim Zugriff auf " + deviceToRead.DataSource + "!", ex);
             }
             finally
             {
