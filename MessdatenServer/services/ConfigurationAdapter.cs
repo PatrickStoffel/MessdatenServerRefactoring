@@ -34,10 +34,6 @@ namespace MessdatenServer.services
                     origDevice.Group = updatedDevice.Group;
                     origDevice.Protocol = updatedDevice.Protocol;
 
-                    if (!ConfigurationAccess.SaveDeviceListToConfig(devices))
-                    {
-                        return null;
-                    }
                     return origDevice;
                 }
             }
@@ -47,10 +43,6 @@ namespace MessdatenServer.services
         public static bool SaveNewDeviceInConfig(List<Device> devices, Device newdDevice)
         {
             devices.Add(newdDevice);
-            if (!ConfigurationAccess.SaveDeviceListToConfig(devices))
-            {
-                return false;
-            }
             return true;
         }
 
@@ -63,11 +55,6 @@ namespace MessdatenServer.services
                     devices.RemoveAt(i);
                     break;            
                 }
-            }
-          
-            if (!ConfigurationAccess.SaveDeviceListToConfig(devices))
-            {
-                return false;
             }
             return true;
         }

@@ -37,7 +37,7 @@ namespace MessdatenServer.Controllers
         public IHttpActionResult UpdateDevice([FromBody]Device updatedDevice)
         {
             List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (services.ConfigurationAdapter.UpdateDeviceInConfig(devices, updatedDevice) == null)
+            if (services.ConfigurationAdapter.UpdateDeviceInConfig(devices, updatedDevice) == null || !ConfigurationAccess.SaveDeviceListToConfig(devices))
             {
                 return BadRequest("Update nicht erfolgreich");
             }
@@ -54,7 +54,7 @@ namespace MessdatenServer.Controllers
             }
 
             List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (!services.ConfigurationAdapter.SaveNewDeviceInConfig(devices, newDevice))
+            if (!services.ConfigurationAdapter.SaveNewDeviceInConfig(devices, newDevice) || !ConfigurationAccess.SaveDeviceListToConfig(devices))
             {
                 return BadRequest("Device " + newDevice.Id + " konnte nicht gespeichert werden!");
             }
@@ -66,7 +66,7 @@ namespace MessdatenServer.Controllers
         public IHttpActionResult DeleteDevice(String id)
         {
             List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (!services.ConfigurationAdapter.DeleteDeviceInConfig(devices, id))
+            if (!services.ConfigurationAdapter.DeleteDeviceInConfig(devices, id) || !ConfigurationAccess.SaveDeviceListToConfig(devices))
             {
                 return BadRequest("Device " + id + " konnte nicht gelöscht werden!");
             }
