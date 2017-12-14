@@ -21,7 +21,7 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/list")]
         public IHttpActionResult GetDeviceList()
         {
-            return Ok(ConfigurationAdapter.GetDeviceListFromConfig());
+            return Ok(ConfigurationAccess.GetDeviceListFromConfig());
         }
 
         [HttpGet]

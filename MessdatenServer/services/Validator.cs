@@ -10,7 +10,7 @@ namespace MessdatenServer.services
     {
         public static bool IsNewDeviceNameValid(Device newDevice)
         {
-            List<Device> devices = ConfigurationAdapter.GetDeviceListFromConfig();
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
 
             foreach (Device existingDevice in devices)
             {
