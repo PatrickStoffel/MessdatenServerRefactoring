@@ -21,56 +21,84 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/list")]
         public IHttpActionResult GetDeviceList()
         {
-            return Ok(ConfigurationAccess.GetDeviceListFromConfig());
+            try
+            {
+                return Ok(ConfigurationAccess.GetDeviceListFromConfig());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
         [Route("messdatenServer/device/{id}")]
         public IHttpActionResult GetDevice(String id)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            return Ok(ConfigurationAdapter.GetDeviceFromConfig(devices, id));
+            try
+            {
+                List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+                return Ok(ConfigurationAdapter.GetDeviceFromConfig(devices, id));
+            }
+            catch (ReadWriteException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("messdatenServer/update")]
         public IHttpActionResult UpdateDevice([FromBody]Device updatedDevice)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (services.ConfigurationAdapter.UpdateDeviceInConfig(devices, updatedDevice) == null || !ConfigurationAccess.SaveDeviceListToConfig(devices))
+            try
             {
-                return BadRequest("Update nicht erfolgreich");
+                List<Device> devicesInConfig = ConfigurationAccess.GetDeviceListFromConfig();
+                List<Device> updetedList = ConfigurationAdapter.UpdateDeviceInConfig(devicesInConfig, updatedDevice);
+                ConfigurationAccess.SaveDeviceListToConfig(updetedList);
+                return Ok();
             }
-            return Ok();
+            catch (ReadWriteException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("messdatenServer/save")]
         public IHttpActionResult SaveDevice([FromBody]Device newDevice)
         {
-            if (!Validator.IsNewDeviceNameValid(newDevice))
+            try
             {
-                return BadRequest("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration,\n\ndie ID muss eindeutig sein!");
+                List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+                if (!Validator.IsNewDeviceNameValid(newDevice))
+                {
+                    return BadRequest("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration, die ID muss eindeutig sein!");
+                }
+                List<Device> savedDevices = ConfigurationAdapter.SaveNewDeviceInConfig(devices, newDevice);
+                ConfigurationAccess.SaveDeviceListToConfig(savedDevices);
+                return Ok();
             }
-
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (!services.ConfigurationAdapter.SaveNewDeviceInConfig(devices, newDevice) || !ConfigurationAccess.SaveDeviceListToConfig(devices))
+            catch (ReadWriteException ex)
             {
-                return BadRequest("Device " + newDevice.Id + " konnte nicht gespeichert werden!");
+                return BadRequest(ex.Message);
             }
-            return Ok();
         }
 
         [HttpGet]
         [Route("messdatenServer/delete/{id}")]
         public IHttpActionResult DeleteDevice(String id)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-            if (!services.ConfigurationAdapter.DeleteDeviceInConfig(devices, id) || !ConfigurationAccess.SaveDeviceListToConfig(devices))
+            try
             {
-                return BadRequest("Device " + id + " konnte nicht gelöscht werden!");
+                List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+                List<Device> modifiedList = ConfigurationAdapter.DeleteDeviceInConfig(devices, id);
+                ConfigurationAccess.SaveDeviceListToConfig(modifiedList);
+                return Ok();
             }
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 

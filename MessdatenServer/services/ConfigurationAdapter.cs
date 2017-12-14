@@ -23,7 +23,7 @@ namespace MessdatenServer.services
             throw new ReadWriteException("Device " + deviceId + " wurde in der Konfiguration nicht gefunden!");
         }
 
-        public static Device UpdateDeviceInConfig(List<Device> devices,Device updatedDevice)
+        public static List<Device> UpdateDeviceInConfig(List<Device> devices,Device updatedDevice)
         {
             foreach (Device origDevice in devices)
             {
@@ -34,26 +34,26 @@ namespace MessdatenServer.services
                     origDevice.Group = updatedDevice.Group;
                     origDevice.Protocol = updatedDevice.Protocol;
 
-                    return origDevice;
+                    return devices;
                 }
             }
             throw new ReadWriteException("Device " + updatedDevice.Id + " konnte nicht upgedated werden!");
         }
 
-        public static bool SaveNewDeviceInConfig(List<Device> devices, Device newdDevice)
+        public static List<Device> SaveNewDeviceInConfig(List<Device> devices, Device newdDevice)
         {
             devices.Add(newdDevice);
-            return true;
+            return devices;
         }
 
-        public static bool DeleteDeviceInConfig(List<Device> devices, String deviceId)
+        public static List<Device> DeleteDeviceInConfig(List<Device> devices, String deviceId)
         {         
             for (int i = 0; i < devices.Count; i++)
             {
                 if (devices[i].Id.Equals(deviceId))
                 {
                     devices.RemoveAt(i);
-                    return true;            
+                    return devices;            
                 }
             }
             throw new ReadWriteException("Device " + deviceId + " konnte nicht gelöscht werden!");
