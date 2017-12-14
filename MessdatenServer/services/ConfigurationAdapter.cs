@@ -20,7 +20,7 @@ namespace MessdatenServer.services
                     return device;
                 }
             }
-            return null;
+            throw new ReadWriteException("Device " + deviceId + " wurde in der Konfiguration nicht gefunden!");
         }
 
         public static Device UpdateDeviceInConfig(List<Device> devices,Device updatedDevice)
@@ -37,7 +37,7 @@ namespace MessdatenServer.services
                     return origDevice;
                 }
             }
-            return null;
+            throw new ReadWriteException("Device " + updatedDevice.Id + " konnte nicht upgedated werden!");
         }
 
         public static bool SaveNewDeviceInConfig(List<Device> devices, Device newdDevice)
@@ -53,10 +53,10 @@ namespace MessdatenServer.services
                 if (devices[i].Id.Equals(deviceId))
                 {
                     devices.RemoveAt(i);
-                    break;            
+                    return true;            
                 }
             }
-            return true;
+            throw new ReadWriteException("Device " + deviceId + " konnte nicht gelöscht werden!");
         }
     }
 }
