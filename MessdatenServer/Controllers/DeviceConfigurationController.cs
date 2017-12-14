@@ -28,14 +28,16 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/device/{id}")]
         public IHttpActionResult GetDevice(String id)
         {
-            return Ok(ConfigurationAdapter.GetDeviceFromConfig(id));
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            return Ok(ConfigurationAdapter.GetDeviceFromConfig(devices, id));
         }
 
         [HttpPost]
         [Route("messdatenServer/update")]
         public IHttpActionResult UpdateDevice([FromBody]Device updatedDevice)
         {
-            if(services.ConfigurationAdapter.UpdateDeviceInConfig(updatedDevice) == null)
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            if (services.ConfigurationAdapter.UpdateDeviceInConfig(devices, updatedDevice) == null)
             {
                 return BadRequest("Update nicht erfolgreich");
             }
@@ -51,7 +53,8 @@ namespace MessdatenServer.Controllers
                 return BadRequest("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration,\n\ndie ID muss eindeutig sein!");
             }
 
-            if (!services.ConfigurationAdapter.SaveNewDeviceInConfig(newDevice))
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            if (!services.ConfigurationAdapter.SaveNewDeviceInConfig(devices, newDevice))
             {
                 return BadRequest("Device " + newDevice.Id + " konnte nicht gespeichert werden!");
             }
@@ -62,7 +65,8 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/delete/{id}")]
         public IHttpActionResult DeleteDevice(String id)
         {
-            if (!services.ConfigurationAdapter.DeleteDeviceInConfig(id))
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            if (!services.ConfigurationAdapter.DeleteDeviceInConfig(devices, id))
             {
                 return BadRequest("Device " + id + " konnte nicht gelöscht werden!");
             }

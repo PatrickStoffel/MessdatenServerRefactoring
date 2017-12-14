@@ -11,10 +11,8 @@ namespace MessdatenServer.services
     public class ConfigurationAdapter
     {
         
-        public static Device GetDeviceFromConfig(String deviceId)
+        public static Device GetDeviceFromConfig(List<Device> devices,String deviceId)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-
             foreach (Device device in devices)
             {
                 if (device.Id.Equals(deviceId))
@@ -25,10 +23,8 @@ namespace MessdatenServer.services
             return null;
         }
 
-        public static Device UpdateDeviceInConfig(Device updatedDevice)
+        public static Device UpdateDeviceInConfig(List<Device> devices,Device updatedDevice)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-
             foreach (Device origDevice in devices)
             {
                 if (origDevice.Id.Equals(updatedDevice.Id))
@@ -48,9 +44,8 @@ namespace MessdatenServer.services
             return null;
         }
 
-        public static bool SaveNewDeviceInConfig(Device newdDevice)
+        public static bool SaveNewDeviceInConfig(List<Device> devices, Device newdDevice)
         {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
             devices.Add(newdDevice);
             if (!ConfigurationAccess.SaveDeviceListToConfig(devices))
             {
@@ -59,10 +54,8 @@ namespace MessdatenServer.services
             return true;
         }
 
-        public static bool DeleteDeviceInConfig(String deviceId)
-        {
-            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-           
+        public static bool DeleteDeviceInConfig(List<Device> devices, String deviceId)
+        {         
             for (int i = 0; i < devices.Count; i++)
             {
                 if (devices[i].Id.Equals(deviceId))

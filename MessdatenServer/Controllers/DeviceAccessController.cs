@@ -18,7 +18,8 @@ namespace MessdatenServer.Controllers
         [Route("messdatenServer/value/{id}")]
         public IHttpActionResult GetMeasurementValue(String id)
         {
-            Device deviceToRead = ConfigurationAdapter.GetDeviceFromConfig(id);
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            Device deviceToRead = ConfigurationAdapter.GetDeviceFromConfig(devices,id);
             if(deviceToRead == null)
             {
                 return BadRequest("Device mit Id " + id + " wurde in der Konfiguration nicht gefunden!");
@@ -36,7 +37,8 @@ namespace MessdatenServer.Controllers
         public IHttpActionResult SetValueZero(String id)
 
         {
-            Device deviceToRead = ConfigurationAdapter.GetDeviceFromConfig(id);
+            List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
+            Device deviceToRead = ConfigurationAdapter.GetDeviceFromConfig(devices, id);
             if (deviceToRead == null)
             {
                 return BadRequest("Device mit Id " + id + " wurde in der Konfiguration nicht gefunden!");
