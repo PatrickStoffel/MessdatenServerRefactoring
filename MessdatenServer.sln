@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessdatenServer", "Messdate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessdatenServerTest", "MessdatenServerTest\MessdatenServerTest.csproj", "{F5A9D438-471E-4C99-A341-C8FE32655C76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessdatenServerTests", "MessdatenServerTests\MessdatenServerTests.csproj", "{CC0884D6-AC84-4B83-859D-5CBF6CE5268A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F5A9D438-471E-4C99-A341-C8FE32655C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A9D438-471E-4C99-A341-C8FE32655C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A9D438-471E-4C99-A341-C8FE32655C76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC0884D6-AC84-4B83-859D-5CBF6CE5268A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0884D6-AC84-4B83-859D-5CBF6CE5268A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0884D6-AC84-4B83-859D-5CBF6CE5268A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC0884D6-AC84-4B83-859D-5CBF6CE5268A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
