@@ -12,8 +12,6 @@ namespace MessdatenServer.Controllers
 {
     public class DeviceAccessController : ApiController
     {
-        Dictionary<String, String> messages = new Dictionary<string, string>();
-
         [HttpGet]
         [Route("messdatenServer/value/{id}")]
         public IHttpActionResult GetMeasurementValue(String id)
@@ -22,7 +20,7 @@ namespace MessdatenServer.Controllers
             {
                 List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
                 Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices, id);
-                String actualValue = MeasurementValueReader.GetActualMeasurementValue(deviceToRead, messages);
+                String actualValue = MeasurementValueReader.GetActualMeasurementValue(deviceToRead);
                 return Ok(Double.Parse(actualValue));
             }
             catch (ReadWriteException ex)
@@ -40,7 +38,7 @@ namespace MessdatenServer.Controllers
             {
                 List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
                 Device deviceToRead = DeviceListHandler.GetDeviceFromDeviceList(devices, id);
-                String handShake = new SylcvacComAccess(messages).SetActualValueToZero(deviceToRead);
+                String handShake = new SylcvacComAccess().SetActualValueToZero(deviceToRead);
                 return Ok(handShake);
             }
             catch (ReadWriteException ex)

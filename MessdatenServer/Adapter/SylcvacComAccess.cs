@@ -14,13 +14,10 @@ namespace MessdatenServer.Adapter
         private bool dataReceived = false;
         private String actualValue = null;
         private SerialPort comPort = null;
-        private Dictionary<String, String> messages = null;
 
-        public SylcvacComAccess(Dictionary<String,String> messages)
+        public SylcvacComAccess()
         {
-            this.messages = messages;
-            comPort = new SerialPort();
-           
+            comPort = new SerialPort();   
         }
         public String GetActualValueFromComInterface(Device deviceToRead)
         {

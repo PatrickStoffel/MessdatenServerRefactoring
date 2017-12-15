@@ -9,14 +9,14 @@ namespace MessdatenServer.services
 {
     public class MeasurementValueReader
     {
-        public static String GetActualMeasurementValue(Device deviceToRead, Dictionary<String, String> messages)
+        public static String GetActualMeasurementValue(Device deviceToRead)
         {
             String actualValue = null;
 
             switch (deviceToRead.Protocol)
             {
                 case "com-1":
-                    actualValue = new SylcvacComAccess(messages).GetActualValueFromComInterface(deviceToRead);
+                    actualValue = new SylcvacComAccess().GetActualValueFromComInterface(deviceToRead);
                     break;
                 default:
                     throw new ReadWriteException("Keine Schnittstelle für das Prokololl " + deviceToRead.Protocol + " implementiert");
