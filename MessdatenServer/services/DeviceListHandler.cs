@@ -37,7 +37,7 @@ namespace MessdatenServer.services
                     return devices;
                 }
             }
-            throw new ReadWriteException("Device " + updatedDevice.Id + " konnte nicht upgedated werden!");
+            throw new ReadWriteException("Update nicht erfolgreich, der Device mit Id " + updatedDevice.Id + " ist nicht in der Konfiguration!");
         }
 
         public static List<Device> SaveNewDeviceInDeviceList(List<Device> devices, Device newdDevice)
@@ -56,7 +56,7 @@ namespace MessdatenServer.services
                     return devices;            
                 }
             }
-            throw new ReadWriteException("Device " + deviceId + " konnte nicht gelöscht werden!");
+            throw new ReadWriteException("Löschen nicht erfolgreich, der Device mit Id " + deviceId + " ist nicht in der Konfiguration!");
         }
     }
 }

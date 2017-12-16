@@ -38,6 +38,14 @@ namespace MessdatenServer.services.Tests
             Assert.AreEqual("dev2", device.Id);
         }
 
+        [Test]
+        public void GetDeviceFromConfig_WithNotExistingDevideId_ReturnsReadWriteException()
+        {
+            ReadWriteException ex = Assert.Catch<ReadWriteException>(() => DeviceListHandler.GetDeviceFromDeviceList(devices, "dev3"));
+
+            StringAssert.Contains("Device dev3 wurde in der Konfiguration nicht gefunden!", ex.Message);
+        }
+
         [Test()]
         public void UpdateDeviceInDeviceList_WithChangedProtocol_ReturnsExpectedProtocol()
         {
@@ -46,6 +54,14 @@ namespace MessdatenServer.services.Tests
             DeviceListHandler.UpdateDeviceInDeviceList(devices, dev1);
 
             Assert.AreEqual("txt", DeviceListHandler.GetDeviceFromDeviceList(devices, "dev1").Protocol);
+        }
+
+        [Test]
+        public void UpdateDeviceInDeviceList_WithNotExistingDevideId_ReturnsReadWriteException()
+        {
+            ReadWriteException ex = Assert.Catch<ReadWriteException>(() => DeviceListHandler.UpdateDeviceInDeviceList(devices, dev3));
+
+            StringAssert.Contains("Update nicht erfolgreich, der Device mit Id dev3 ist nicht in der Konfiguration!", ex.Message);
         }
 
         [Test()]
@@ -66,6 +82,14 @@ namespace MessdatenServer.services.Tests
             DeviceListHandler.DeleteDeviceInDeviceList(devices, "dev1");
 
             Assert.AreEqual(noOfDevicesBevorDeleteDeviceFromList - 1, devices.Count);
+        }
+
+        [Test]
+        public void DeleteDeviceInDeviceList_WithNotExistingDevideId_ReturnsReadWriteException()
+        {
+            ReadWriteException ex = Assert.Catch<ReadWriteException>(() => DeviceListHandler.DeleteDeviceInDeviceList(devices, "dev3"));
+
+            StringAssert.Contains("Löschen nicht erfolgreich, der Device mit Id dev3 ist nicht in der Konfiguration!", ex.Message);
         }
 
         [TearDown]
