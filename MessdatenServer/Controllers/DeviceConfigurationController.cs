@@ -70,10 +70,6 @@ namespace MessdatenServer.Controllers
             try
             {
                 List<Device> devices = ConfigurationAccess.GetDeviceListFromConfig();
-                if (!Validator.IsNewDeviceNameValid(devices, newDevice))
-                {
-                    return BadRequest("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration, die ID muss eindeutig sein!");
-                }
                 List<Device> savedDevices = DeviceListHandler.SaveNewDeviceInDeviceList(devices, newDevice);
                 ConfigurationAccess.SaveDeviceListToConfig(savedDevices);
                 return Ok();

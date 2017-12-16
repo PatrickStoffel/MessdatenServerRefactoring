@@ -40,9 +40,16 @@ namespace MessdatenServer.services
             throw new ReadWriteException("Update nicht erfolgreich, der Device mit Id " + updatedDevice.Id + " ist nicht in der Konfiguration!");
         }
 
-        public static List<Device> SaveNewDeviceInDeviceList(List<Device> devices, Device newdDevice)
+        public static List<Device> SaveNewDeviceInDeviceList(List<Device> devices, Device newDevice)
         {
-            devices.Add(newdDevice);
+            foreach (Device existingDevice in devices)
+            {
+                if (existingDevice.Id.Equals(newDevice.Id.Trim()))
+                {
+                    throw new ReadWriteException("Die Id " + newDevice.Id + " existiert bereits in der Konfiguration, die ID muss eindeutig sein!");
+                }
+            }
+            devices.Add(newDevice);
             return devices;
         }
 
