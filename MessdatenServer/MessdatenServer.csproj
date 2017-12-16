@@ -134,7 +134,6 @@
     <Compile Include="services\MeasurementValueReader.cs" />
     <Compile Include="services\DeviceListHandler.cs" />
     <Compile Include="services\ReadWriteException.cs" />
-    <Compile Include="services\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
