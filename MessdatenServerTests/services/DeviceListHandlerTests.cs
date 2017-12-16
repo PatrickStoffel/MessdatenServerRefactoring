@@ -74,6 +74,14 @@ namespace MessdatenServer.services.Tests
             Assert.AreEqual(noOfDevicesBevorAddDeviceToList + 1, devices.Count);
         }
 
+        [Test]
+        public void SaveNewDeviceInDeviceList_WithNotExistingDevideId_ReturnsReadWriteException()
+        {
+            ReadWriteException ex = Assert.Catch<ReadWriteException>(() => DeviceListHandler.SaveNewDeviceInDeviceList(devices, dev2));
+
+            StringAssert.Contains("Die Id " + dev2.Id + " existiert bereits in der Konfiguration, die ID muss eindeutig sein!", ex.Message);
+        }
+
         [Test()]
         public void DeleteDeviceInDeviceList_WithExistingId_DecrementListCount()
         {
