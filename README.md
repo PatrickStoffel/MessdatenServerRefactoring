@@ -1,4 +1,3 @@
 # MessdatenServerRefactoring
 
-### Status
-![Build Status](https://messdatenserver.visualstudio.com/MessdatenServer/_apis/public/build/definitions/e3d029f9-bcde-4a61-8192-4aa11dbef3f8/1/badge)
+![Build Status](https://messdatenserver.visualstudio.com/_apis/public/build/definitions/64214a36-dc6b-424c-a981-e178b335810d/1/badge)
