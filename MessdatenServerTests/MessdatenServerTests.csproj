@@ -57,13 +57,13 @@
     <Compile Include="services\DeviceListHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MessdatenServer\MessdatenServer.csproj">
       <Project>{A18BC19D-353C-40BB-936D-E2B6B6E9B63C}</Project>
       <Name>MessdatenServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
