@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MessdatenServer.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ConfigPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">c:\\temp\\DeviceConfig.json</Value>
-    </Setting>
     <Setting Name="BaudRateSylvacGauge" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">4800</Value>
     </Setting>
@@ -22,6 +19,15 @@
     </Setting>
     <Setting Name="TimeOutReceiveData" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="ConfigFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DeviceConfig.json</Value>
+    </Setting>
+    <Setting Name="TestConfigFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TestDeviceConfig.json</Value>
+    </Setting>
+    <Setting Name="TempConfigFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TempDeviceConfig.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>

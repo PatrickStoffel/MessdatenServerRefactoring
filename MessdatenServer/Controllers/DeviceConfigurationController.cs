@@ -96,6 +96,29 @@ namespace MessdatenServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("messdatenServer/settest/{option}")]
+        public IHttpActionResult SetTestConfigFile(String option)
+        {
+            try
+            {
+                switch (option)
+                {
+                    case "set":
+                        ConfigurationAccess.SetTestConfigFile();
+                        break;
+                    case "reset":
+                        ConfigurationAccess.RestoreConfigFile();
+                        break;
+                }
+                return Ok();
+            }
+            catch (ReadWriteException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
    

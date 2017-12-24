@@ -13,7 +13,7 @@ namespace MessdatenServer.services
         public static List<Device> GetDeviceListFromConfig()
         {
             List<Device> items = null;
-            using (StreamReader reader = new StreamReader(Properties.Settings.Default.ConfigPath))
+            using (StreamReader reader = new StreamReader(GetConfigFilePath()))
             {
                 string json = null;
                 try
@@ -31,7 +31,7 @@ namespace MessdatenServer.services
 
         public static bool SaveDeviceListToConfig(List<Device> devices)
         {
-            using (StreamWriter writer = new StreamWriter(Properties.Settings.Default.ConfigPath))
+            using (StreamWriter writer = new StreamWriter(GetConfigFilePath()))
             {
                 string json = JsonConvert.SerializeObject(devices);
                 try
@@ -44,6 +44,46 @@ namespace MessdatenServer.services
                     throw new ReadWriteException("Device-Liste konnte nicht in Konfiguration gespeichert werden", ex);
                 }
             }
+        }
+
+        public static void SetTestConfigFile()
+        {
+            try
+            {
+                File.Copy(GetConfigFilePath(), GetTempConfigFilePath(), true);
+                File.Copy(GetTestConfigFilePath(), GetConfigFilePath(), true);
+            }
+            catch (Exception ex)
+            {
+                throw new ReadWriteException("Das Test-Configfile konnte nicht erstellt werden!", ex);
+            }
+        }
+
+        public static void RestoreConfigFile()
+        {
+            try
+            {
+                File.Copy(GetTempConfigFilePath(), GetConfigFilePath(), true);
+            }
+            catch (Exception ex)
+            {
+                throw new ReadWriteException("Das Configfile konnte nicht wieder hergestellt werden!", ex);
+            }
+        }
+
+        private static string GetConfigFilePath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), Properties.Settings.Default.ConfigFile);
+        }
+
+        private static string GetTempConfigFilePath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), Properties.Settings.Default.TempConfigFile);
+        }
+
+        private static string GetTestConfigFilePath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), Properties.Settings.Default.TestConfigFile);
         }
     }
 }

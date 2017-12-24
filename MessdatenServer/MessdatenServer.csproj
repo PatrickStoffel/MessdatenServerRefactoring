@@ -146,6 +146,9 @@
     <Content Include="View\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="View\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="View\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Data\DeviceConfig.json" />
+    <Content Include="App_Data\TempDeviceConfig.json" />
+    <Content Include="App_Data\TestDeviceConfig.json" />
     <None Include="Properties\PublishProfiles\MessdatenServer.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -158,9 +161,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
