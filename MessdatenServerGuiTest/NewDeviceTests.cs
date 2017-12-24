@@ -3,6 +3,7 @@ using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Net;
 
 namespace MessdatenServerGuiTest
 {
@@ -10,11 +11,14 @@ namespace MessdatenServerGuiTest
     public class NewDeviceTests
     {
         private const string NEW_VALID_ID = "device66";
+        private const string OPTION_SET_TEST = "set";
+        private const string OPTION_RESET = "reset";
         private IWebDriver driver = null;
 
         [SetUp]
         public void Setup()
         {
+            SetTestConfig(OPTION_SET_TEST);
             InitDriver();
             LoadDeviceList();         
         }
@@ -35,6 +39,12 @@ namespace MessdatenServerGuiTest
         {
             driver.Close();
             driver.Quit();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            SetTestConfig(OPTION_RESET);
         }
 
         private void InitDriver()
@@ -78,6 +88,15 @@ namespace MessdatenServerGuiTest
         {
             driver.FindElement(By.XPath("//*[@id=\"btn_confirm\"]")).Click();
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));
+        }
+
+        public void SetTestConfig(String option)
+        {
+            WebRequest request = WebRequest.Create(
+              "http://localhost:58296/messdatenServer/settest/" + option);
+            request.Credentials = CredentialCache.DefaultCredentials;
+            WebResponse response = request.GetResponse();
+            response.Close();
         }
     }
 }
