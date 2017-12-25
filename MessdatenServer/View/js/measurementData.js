@@ -25,19 +25,18 @@ $(document).ready(function () {
                     row.insertCell(6).innerHTML = '<button class="btn btn-primary" onclick="openDeleteForm(this)"><span class="glyphicon glyphicon-trash"></span></button>';
                 } 
                 $('#list').DataTable({
-                    //removing arrows from 'edit' and 'delete' columns
                     "aoColumnDefs": [{ "bSortable": false, "aTargets": [5, 6] }]
                 });
 
             } else if (xmlhttpDevList.status === 400) {
-                //   $("#id_form").toggle("fast");
-                //        showError(xmlhttpDevList.responseText);
-
+                document.getElementById("errornew").innerHTML = xhttp.responseText;
+            } else if (xmlhttpDevList.status === 404) {
+                document.getElementById("errornew").innerHTML = "Keine Antwort von MessdatenServer!";
             }
         }
     };
     xmlhttpDevList.ontimeout = function () {
-        showError("Die Device-Liste kann nicht vom MessdatenServer geladen werden!");
+        document.getElementById("errornew").innerHTML = "Timeout, die Device-Liste kann nicht vom MessdatenServer geladen werden!";
     };
     xmlhttpDevList.open("GET", "../messdatenServer/list" + '?_=' + new Date().getTime(), true);
     xmlhttpDevList.timeout = 6000;
