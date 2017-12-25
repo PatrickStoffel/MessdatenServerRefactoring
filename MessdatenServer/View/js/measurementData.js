@@ -36,12 +36,11 @@ $(document).ready(function () {
             }
         }
     };
-
     xmlhttpDevList.ontimeout = function () {
-        showError("Der Dienst messdaten-server antwortet nicht");
+        showError("Die Device-Liste kann nicht vom MessdatenServer geladen werden!");
     };
     xmlhttpDevList.open("GET", "../messdatenServer/list" + '?_=' + new Date().getTime(), true);
-    xmlhttpDevList.timeout = 2000;
+    xmlhttpDevList.timeout = 6000;
     xmlhttpDevList.send();
 });
 
