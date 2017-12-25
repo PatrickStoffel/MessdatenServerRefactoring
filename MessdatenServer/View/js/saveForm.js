@@ -2,6 +2,7 @@
 function saveDevice() {
 
     if (!isNewDeviceFormValid()) {
+        document.getElementById("errornew").innerHTML = "Eingabefelder für neuen Device nicht vollständig! Benötigte Felder: Id, HostIp, DataSource und Protocol";
         return false;
     }
 
@@ -11,7 +12,7 @@ function saveDevice() {
             if (xhttp.status === 200) {
                 openListForm();
             } else if (xhttp.status === 400) {
-                window.alert(xhttp.responseText);
+                document.getElementById("errornew").innerHTML = xhttp.responseText;
             }
         }
     };
@@ -36,12 +37,12 @@ function openListForm() {
 
 function isNewDeviceFormValid() {
 
-    if ( (!document.getElementById("name").value)
+    if ((!document.getElementById("name").value)
+        || (!document.getElementById("hostIp").value)
        ||(!document.getElementById("dataSource").value)
        ||(!document.getElementById("protocol").value)
        )
     {
-        window.alert("Eingabefelder für neuen Device nicht vollständig!\n\nBenötigte Felder:\n\n-Id\n-DataSource\n-Protocol");
         return false;
     }
     return true;
