@@ -33,28 +33,28 @@ namespace MessdatenServerGuiTest
 
         private void OpenNewDevicePage()
         {
-            Driver.FindElement(By.Id("btnNewDev")).Click();
+            GetDriver().FindElement(By.Id("btnNewDev")).Click();
             WaitUntilElementDiplayed(By.Id("name"));
         }
 
         private void FillNewDeviceFormWith(string id)
         {
-            Driver.FindElement(By.Id("name")).SendKeys(id);
-            Driver.FindElement(By.Id("hostIp")).SendKeys("136.230.68.65");
-            Driver.FindElement(By.Id("dataSource")).SendKeys("COM12");
-            Driver.FindElement(By.Id("group")).SendKeys("B");
-            Driver.FindElement(By.Id("protocol")).SendKeys("com-2");
+            GetDriver().FindElement(By.Id("name")).SendKeys(id);
+            GetDriver().FindElement(By.Id("hostIp")).SendKeys("136.230.68.65");
+            GetDriver().FindElement(By.Id("dataSource")).SendKeys("COM12");
+            GetDriver().FindElement(By.Id("group")).SendKeys("B");
+            GetDriver().FindElement(By.Id("protocol")).SendKeys("com-2");
         }
 
         private string GetNewDeviceIdFromDeviceList()
         {
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]"));
-            return Driver.FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]")).Text;
+            return GetDriver().FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]")).Text;
         }
 
         private void SaveDevice()
         {
-            Driver.FindElement(By.Id("btn_confirm")).Click();
+            GetDriver().FindElement(By.Id("btn_confirm")).Click();
         }
     }
 }

@@ -19,30 +19,30 @@ namespace MessdatenServerGuiTest
         private const string ORIGINAL_CONFIGURATION = "reset";
         private IWebDriver driver = null;
 
-        public IWebDriver Driver {
-            get => driver;
-            set => driver = value;
-        }
-
         [SetUp]
         public void Setup()
         {
             SetConfiguration(TEST_CONFIGURATION);
-            Driver = CreateDriver();
+            driver = CreateDriver();
             LoadDeviceList();
         }
 
         [TearDown]
         public void TearDown()
         {
-            Driver.Close();
-            Driver.Quit();
+            driver.Close();
+            driver.Quit();
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
             SetConfiguration(ORIGINAL_CONFIGURATION);
+        }
+
+        public IWebDriver GetDriver()
+        {
+            return driver;
         }
 
         private TWebDriver CreateDriver()
@@ -52,13 +52,13 @@ namespace MessdatenServerGuiTest
 
         public void WaitUntilElementDiplayed(By identificator)
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(d => d.FindElement(identificator).Displayed);
         }
 
         private void LoadDeviceList()
         {
-            Driver.Navigate().GoToUrl(URL);
+            driver.Navigate().GoToUrl(URL);
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));
         }
 
@@ -74,7 +74,7 @@ namespace MessdatenServerGuiTest
         public string GetErrorMessage(By identificator)
         {
             WaitUntilElementDiplayed(identificator);
-            return Driver.FindElement(identificator).Text;
+            return driver.FindElement(identificator).Text;
         }
     }
 }
