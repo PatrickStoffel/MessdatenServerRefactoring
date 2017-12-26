@@ -2,13 +2,17 @@
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Net;
 
 namespace MessdatenServerGuiTest
 {
-    [TestFixture]
-    public class NewDeviceTests
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(InternetExplorerDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    public class NewDeviceTests<TWebDriver> where TWebDriver : IWebDriver, new()
     {
         private const string NEW_VALID_ID = "device66";
         private const string OPTION_SET_TEST = "set";
@@ -49,7 +53,7 @@ namespace MessdatenServerGuiTest
 
         private void InitDriver()
         {
-            driver = new ChromeDriver();
+            driver = new TWebDriver();
         }
 
         private void LoadDeviceList()
