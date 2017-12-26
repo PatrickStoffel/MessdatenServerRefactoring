@@ -14,28 +14,40 @@ namespace MessdatenServerGuiTest
     [TestFixture(typeof(FirefoxDriver))]
     public class NewDeviceTests<TWebDriver> where TWebDriver : IWebDriver, new()
     {
+        private const string URL = "http://localhost:58296/View/index.html";
         private const string NEW_VALID_ID = "device66";
-        private const string OPTION_SET_TEST = "set";
-        private const string OPTION_RESET = "reset";
+        private const string EXISTING_ID = "device1";
+        private const string TEST_CONFIGURATION = "set";
+        private const string ORIGINAL_CONFIGURATION = "reset";
         private IWebDriver driver = null;
 
         [SetUp]
         public void Setup()
         {
-            SetTestConfig(OPTION_SET_TEST);
+            SetConfiguration(TEST_CONFIGURATION);
             InitDriver();
-            LoadDeviceList();         
+            LoadDeviceList();
+            OpenNewDevicePage();
         }
 
         [Test]
         public void CreateNewDevice_WithValidId_SaveDeviceInConfig()
-        {
-            OpenNewDevicePage();
-            FillNewDeviceForm();
-            SaveNewDevice();
+        {          
+            FillNewDeviceFormWith(NEW_VALID_ID);
+            SaveDevice();
 
-            string id = GetNewDeviceIdFromDeviceList();
-            Assert.AreEqual(NEW_VALID_ID, id);
+            string storedId = GetNewDeviceIdFromDeviceList();
+            Assert.AreEqual(NEW_VALID_ID, storedId);
+        }
+
+        [Test]
+        public void CreateNewDevice_WithExistingDevice_ReturnsErrorMessage()
+        {
+            FillNewDeviceFormWith(EXISTING_ID);
+            SaveDevice();
+
+            string errorMessage = GetErrorMessage(By.Id("errornew"));
+            StringAssert.Contains("Die Id device1 existiert bereits in der Konfiguration, die ID muss eindeutig sein!", errorMessage);
         }
 
         [TearDown]
@@ -48,7 +60,7 @@ namespace MessdatenServerGuiTest
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            SetTestConfig(OPTION_RESET);
+            SetConfiguration(ORIGINAL_CONFIGURATION);
         }
 
         private void InitDriver()
@@ -58,7 +70,7 @@ namespace MessdatenServerGuiTest
 
         private void LoadDeviceList()
         {
-            driver.Navigate().GoToUrl("http://localhost:58296/View/index.html");
+            driver.Navigate().GoToUrl(URL);
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));
         }
 
@@ -70,13 +82,13 @@ namespace MessdatenServerGuiTest
 
         private void OpenNewDevicePage()
         {
-            driver.FindElement(By.XPath("/html/body/div/div[1]/div/button")).Click();
+            driver.FindElement(By.Id("btnNewDev")).Click();
             WaitUntilElementDiplayed(By.Id("name"));
         }
 
-        private void FillNewDeviceForm()
+        private void FillNewDeviceFormWith(string id)
         {
-            driver.FindElement(By.Id("name")).SendKeys(NEW_VALID_ID);
+            driver.FindElement(By.Id("name")).SendKeys(id);
             driver.FindElement(By.Id("hostIp")).SendKeys("136.230.68.65");
             driver.FindElement(By.Id("dataSource")).SendKeys("COM12");
             driver.FindElement(By.Id("group")).SendKeys("B");
@@ -85,16 +97,22 @@ namespace MessdatenServerGuiTest
 
         private string GetNewDeviceIdFromDeviceList()
         {
+            WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]"));
             return driver.FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]")).Text;
         }
 
-        private void SaveNewDevice()
+        private void SaveDevice()
         {
-            driver.FindElement(By.XPath("//*[@id=\"btn_confirm\"]")).Click();
-            WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));
+            driver.FindElement(By.Id("btn_confirm")).Click();         
         }
 
-        public void SetTestConfig(String option)
+        private string GetErrorMessage(By by)
+        {
+            WaitUntilElementDiplayed(By.Id("errornew"));
+            return driver.FindElement(by).Text;
+        }
+
+        public void SetConfiguration(String option)
         {
             WebRequest request = WebRequest.Create(
               "http://localhost:58296/messdatenServer/settest/" + option);
