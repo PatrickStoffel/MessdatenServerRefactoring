@@ -19,7 +19,10 @@ namespace MessdatenServerGuiTest
         private const string ORIGINAL_CONFIGURATION = "reset";
         private IWebDriver driver = null;
 
-        public IWebDriver Driver { get => driver; set => driver = value; }
+        public IWebDriver Driver {
+            get => driver;
+            set => driver = value;
+        }
 
         [SetUp]
         public void Setup()
