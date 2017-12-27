@@ -51,10 +51,5 @@ namespace MessdatenServerGuiTest
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]"));
             return GetDriver().FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[4]/td[1]")).Text;
         }
-
-        private void SaveDevice()
-        {
-            GetDriver().FindElement(By.Id("btn_confirm")).Click();
-        }
     }
 }

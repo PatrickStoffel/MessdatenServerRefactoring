@@ -63,16 +63,16 @@ namespace MessdatenServerGuiTest
         private void LoadDeviceList()
         {
             driver.Navigate().GoToUrl(URL);
-            WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));
+            WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));   
         }
 
         public void SetConfiguration(String option)
         {
             WebRequest request = WebRequest.Create(
 #if DEBUG
-            "http://localhost:58296/messdatenServer/settest/" + option);
+           "http://localhost:58296/messdatenServer/settest/" + option);
 #else
-            "http://messdatenserver.azurewebsites.net/messdatenServer/settest/" + option);
+           "http://messdatenserver.azurewebsites.net/messdatenServer/settest/" + option);
 #endif
             request.Credentials = CredentialCache.DefaultCredentials;
             WebResponse response = request.GetResponse();
@@ -83,6 +83,11 @@ namespace MessdatenServerGuiTest
         {
             WaitUntilElementDiplayed(identificator);
             return driver.FindElement(identificator).Text;
+        }
+
+        public void SaveDevice()
+        {
+            GetDriver().FindElement(By.Id("btn_confirm")).Click();
         }
     }
 }
