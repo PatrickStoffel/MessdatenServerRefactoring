@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace MessdatenServerGuiTest
 {
@@ -19,19 +20,20 @@ namespace MessdatenServerGuiTest
         }
 
         private void OpenUpdateView()
-        {           
+        {                                    
             GetDriver().FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[6]/button")).Click();
-            WaitUntilElementDiplayed(By.Id("name"));
+            WaitUntilElementDiplayed(By.Id("protocol"));
         }
 
         private void ModifyProtocolWith(string value)
         {
+            Thread.Sleep(1000);
             GetDriver().FindElement(By.Id("protocol")).Clear();
             GetDriver().FindElement(By.Id("protocol")).SendKeys(value);
         }
 
         private string GetUpdatedProtocolFromList()
-        {         
+        {   
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[5]"));
             return GetDriver().FindElement(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[5]")).Text;
         }

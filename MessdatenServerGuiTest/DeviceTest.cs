@@ -56,13 +56,13 @@ namespace MessdatenServerGuiTest
 
         public void WaitUntilElementDiplayed(By identificator)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(d => d.FindElement(identificator).Displayed);
         }
 
         private void LoadDeviceList()
         {
-            driver.Navigate().GoToUrl(URL);
+            driver.Navigate().GoToUrl(URL);  
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));   
         }
 
