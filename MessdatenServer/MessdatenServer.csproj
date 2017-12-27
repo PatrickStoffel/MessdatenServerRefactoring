@@ -149,6 +149,7 @@
     <Content Include="App_Data\DeviceConfig.json" />
     <Content Include="App_Data\TempDeviceConfig.json" />
     <Content Include="App_Data\TestDeviceConfig.json" />
+    <None Include="Properties\PublishProfiles\MessdatenServer - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MessdatenServer.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -14,7 +14,11 @@ namespace MessdatenServerGuiTest
     [TestFixture(typeof(FirefoxDriver))]
     public class DeviceTest<TWebDriver> where TWebDriver : IWebDriver, new()
     {
+#if DEBUG
         private const string URL = "http://localhost:58296/View/index.html";
+#else
+        private const string URL = "http://messdatenserver.azurewebsites.net/View/index.html";
+#endif
         private const string TEST_CONFIGURATION = "set";
         private const string ORIGINAL_CONFIGURATION = "reset";
         private IWebDriver driver = null;
@@ -52,7 +56,7 @@ namespace MessdatenServerGuiTest
 
         public void WaitUntilElementDiplayed(By identificator)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(d => d.FindElement(identificator).Displayed);
         }
 
@@ -65,7 +69,11 @@ namespace MessdatenServerGuiTest
         public void SetConfiguration(String option)
         {
             WebRequest request = WebRequest.Create(
-              "http://localhost:58296/messdatenServer/settest/" + option);
+#if DEBUG
+            "http://localhost:58296/messdatenServer/settest/" + option);
+#else
+            "http://messdatenserver.azurewebsites.net/messdatenServer/settest/" + option);
+#endif
             request.Credentials = CredentialCache.DefaultCredentials;
             WebResponse response = request.GetResponse();
             response.Close();
