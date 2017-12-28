@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeleteDeviceTest.cs" />
     <Compile Include="DeviceTest.cs" />
     <Compile Include="NewDeviceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
