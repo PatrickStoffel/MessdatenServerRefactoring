@@ -46,7 +46,7 @@ function updateDevice() {
             if (xhttp.status === 200) {
                 openListForm();
             } else if (xhttp.status === 400) {
-                window.alert(xhttp.responseText);
+                document.getElementById("errornew").innerHTML = xhttp.responseText;
             }
         }
     };
@@ -79,7 +79,7 @@ function deleteDevice() {
             if (xmlhttp.status === 200) {
                 openListForm();
             } else if (xmlhttp.status === 400) {
-                window.alert(xmlhttp.responseText);
+                document.getElementById("errornew").innerHTML = xmlhttp.responseText;
             }
         }
     };
