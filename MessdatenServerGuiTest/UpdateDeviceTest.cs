@@ -7,16 +7,31 @@ namespace MessdatenServerGuiTest
     public class UpdateDeviceTest<TWebDriver> : DeviceTest<TWebDriver> where TWebDriver : IWebDriver, new()
     {
         private const string VALID_PROTOCOL = "com-3";
+        private const string EMPTY_STRING = "";
 
         [Test]
         public void UpdateDevice_WithValidValue_SaveUpdatedDeviceInConfig()
         {
-            OpenUpdateView();
-            ModifyProtocolWith(VALID_PROTOCOL);
-            SaveDevice();
+            UpdateAndSaveDeviceWith(VALID_PROTOCOL);
 
             string updatedProtocol = GetUpdatedProtocolFromList();
             Assert.AreEqual(VALID_PROTOCOL, updatedProtocol);
+        }
+
+        [Test]
+        public void UpdateDevice_WithMissingValue_ReturnsErrorMessage()
+        {
+            UpdateAndSaveDeviceWith(EMPTY_STRING);
+
+            string errorMessage = GetErrorMessage(By.Id("errornew"));
+            StringAssert.Contains("Eingabefelder für Device nicht vollständig! Benötigte Felder: Id, HostIp, DataSource und Protocol", errorMessage);
+        }
+
+        private void UpdateAndSaveDeviceWith(string value)
+        {
+            OpenUpdateView();
+            ModifyProtocolWith(value);
+            SaveDevice();
         }
 
         private void OpenUpdateView()
