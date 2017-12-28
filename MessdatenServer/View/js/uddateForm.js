@@ -34,6 +34,12 @@ function getUrlParameterByName(name, url) {
 
 
 function updateDevice() {
+
+    if (!isUdatedDeviceFormValid()) {
+        document.getElementById("errornew").innerHTML = "Eingabefelder für Device nicht vollständig! Benötigte Felder: Id, HostIp, DataSource und Protocol";
+        return false;
+    }
+
     let xhttp = new XMLHttpRequest();
     xhttp.onload = function (e) {
         if (xhttp.readyState === 4) {
@@ -79,4 +85,16 @@ function deleteDevice() {
     };
     xmlhttp.open("GET", "../messdatenServer/delete/" + name, true);
     xmlhttp.send();
+}
+
+function isUdatedDeviceFormValid() {
+
+    if ((!document.getElementById("name").value)
+        || (!document.getElementById("hostIp").value)
+        || (!document.getElementById("dataSource").value)
+        || (!document.getElementById("protocol").value)
+    ) {
+        return false;
+    }
+    return true;
 }
