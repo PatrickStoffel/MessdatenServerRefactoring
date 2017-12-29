@@ -131,10 +131,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="services\ConfigurationAccess.cs" />
-    <Compile Include="services\MeasurementValueReader.cs" />
-    <Compile Include="services\DeviceListHandler.cs" />
-    <Compile Include="services\ReadWriteException.cs" />
+    <Compile Include="Services\ConfigurationAccess.cs" />
+    <Compile Include="Services\MeasurementValueReader.cs" />
+    <Compile Include="Services\DeviceListHandler.cs" />
+    <Compile Include="Services\ReadWriteException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using MessdatenServer.Models;
 using MessdatenServer.services;
-using System.Web.Http.Cors;
-using System.Net.Http.Headers;
-using System.IO;
 
 namespace MessdatenServer.Controllers
 {
-
-   // [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DeviceConfigurationController : ApiController
     {
 

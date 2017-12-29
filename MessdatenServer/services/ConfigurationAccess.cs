@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using MessdatenServer.Models;
 using System.IO;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Web;
 
 namespace MessdatenServer.services
 {
