@@ -57,12 +57,18 @@ namespace MessdatenServerGuiTest
         public void WaitUntilElementDiplayed(By identificator)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElement(identificator).Displayed);
+            wait.Until(ExpectedConditions.ElementIsVisible(identificator));
+        }
+
+        public void WaitUntilElementClickable(By identificator)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(identificator));
         }
 
         private void LoadDeviceList()
         {
-            driver.Navigate().GoToUrl(URL);  
+            driver.Navigate().GoToUrl(URL);
             WaitUntilElementDiplayed(By.XPath("//*[@id=\"deviceTable\"]/tr[1]/td[1]"));   
         }
 
@@ -85,8 +91,9 @@ namespace MessdatenServerGuiTest
             return driver.FindElement(identificator).Text;
         }
 
-        public void SaveDevice()
+        public void ConfirmChanges()
         {
+            WaitUntilElementClickable(By.Id("btn_confirm"));
             GetDriver().FindElement(By.Id("btn_confirm")).Click();
         }
     }

@@ -31,7 +31,7 @@ namespace MessdatenServerGuiTest
         {
             OpenUpdateView();
             ModifyProtocolWith(value);
-            SaveDevice();
+            ConfirmChanges();
         }
 
         private void OpenUpdateView()

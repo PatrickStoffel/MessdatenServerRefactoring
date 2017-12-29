@@ -14,7 +14,7 @@ namespace MessdatenServerGuiTest
         {
             OpenNewDevicePage();
             FillNewDeviceFormWith(NEW_VALID_ID);
-            SaveDevice();
+            ConfirmChanges();
 
             string storedId = GetNewDeviceIdFromDeviceList();
             Assert.AreEqual(NEW_VALID_ID, storedId);
@@ -25,7 +25,7 @@ namespace MessdatenServerGuiTest
         {
             OpenNewDevicePage();
             FillNewDeviceFormWith(EXISTING_ID);
-            SaveDevice();
+            ConfirmChanges();
 
             string errorMessage = GetErrorMessage(By.Id("errornew"));
             StringAssert.Contains("Die Id device1 existiert bereits in der Konfiguration, die ID muss eindeutig sein!", errorMessage);
