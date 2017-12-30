@@ -8,6 +8,8 @@ namespace MessdatenServer.Adapter
 {
     public class SylcvacComAccess
     {
+        private const string COMMAND_INTERROGATION = "?";
+        private const string COMMAND_SET = "SET";
         private bool dataReceived = false;
         private String actualValue = null;
         private SerialPort comPort = null;
@@ -24,7 +26,9 @@ namespace MessdatenServer.Adapter
             {
                 OpenComPort(deviceToRead);
 
-                comPort.Write((char)32 + "?" + (char)Properties.Settings.Default.AsciCarriageReturn);
+                comPort.Write((char)Properties.Settings.Default.AsciSpace +
+                              COMMAND_INTERROGATION + 
+                              (char)Properties.Settings.Default.AsciCarriageReturn);
 
                 WaitForDataReceivedComPort(deviceToRead);
             }
@@ -47,7 +51,7 @@ namespace MessdatenServer.Adapter
             {
                 OpenComPort(deviceToRead);
 
-                comPort.Write("SET" + (char)Properties.Settings.Default.AsciCarriageReturn);
+                comPort.Write(COMMAND_SET + (char)Properties.Settings.Default.AsciCarriageReturn);
 
                 WaitForDataReceivedComPort(deviceToRead);
             }

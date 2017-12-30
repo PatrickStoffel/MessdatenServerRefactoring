@@ -103,5 +103,14 @@ namespace MessdatenServer.Properties {
                 return ((string)(this["TempConfigFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public int AsciSpace {
+            get {
+                return ((int)(this["AsciSpace"]));
+            }
+        }
     }
 }
