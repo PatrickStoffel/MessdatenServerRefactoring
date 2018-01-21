@@ -1,6 +1,6 @@
 # MessdatenServerRefactoring
 
-###VSTS
+### VSTS
 ![Build Status](https://messdatenserver.visualstudio.com/_apis/public/build/definitions/64214a36-dc6b-424c-a981-e178b335810d/1/badge)
 
 ## Entwicklungsteam
@@ -20,7 +20,7 @@ verwaltet werden.
 Eine Demonstration des Auslesens der Messwerte aus den konfigurierten Geräten ist hier nicht vorgesehen, da dies Teil 
 der letzten Semesterarbeit war.
 
-##Umsetzung
+## Umsetzung
 
 Der Verlauf des Refactorings kann über die History der Commits in GitHub nachvollzogen werden.
 
