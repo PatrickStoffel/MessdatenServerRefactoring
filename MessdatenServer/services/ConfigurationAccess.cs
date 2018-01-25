@@ -17,12 +17,12 @@ namespace MessdatenServer.services
                 try
                 {
                     json = reader.ReadToEnd();
+                    items = JsonConvert.DeserializeObject<List<Device>>(json);
                 }
                 catch (Exception ex)
                 {
                     throw new ReadWriteException("Device-Liste konnte nicht aus der Konfiguration gelesen werden", ex);
-                }
-                items = JsonConvert.DeserializeObject<List<Device>>(json);
+                }           
             }
             return items;
         }
