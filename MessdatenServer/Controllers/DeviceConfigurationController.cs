@@ -45,8 +45,8 @@ namespace MessdatenServer.Controllers
             try
             {
                 List<Device> devicesInConfig = ConfigurationAccess.GetDeviceListFromConfig();
-                List<Device> updetedList = DeviceListHandler.UpdateDeviceInDeviceList(devicesInConfig, updatedDevice);
-                ConfigurationAccess.SaveDeviceListToConfig(updetedList);
+                List<Device> updatedList = DeviceListHandler.UpdateDeviceInDeviceList(devicesInConfig, updatedDevice);
+                ConfigurationAccess.SaveDeviceListToConfig(updatedList);
                 return Ok();
             }
             catch (ReadWriteException ex)
