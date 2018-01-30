@@ -30,7 +30,7 @@ namespace MessdatenServer.services.Tests
         {
             Device device = DeviceListHandler.GetDeviceFromDeviceList(devices, "dev2");
 
-            Assert.AreEqual("dev2", device.Id);
+            Assert.AreEqual("dev1", device.Id);
         }
 
         [Test]
